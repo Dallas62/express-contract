@@ -29,12 +29,21 @@ app.post('/api/user', contract(Joi, schema), function(req, res) {
         return;
     }
     
-    res.status(200).json({});
+    res.status(200).json(req.body);
 });
 
 ```
 
-Actually, it was test with [Joi](https://github.com/hapijs/joi).
+Variables:
+
+- `req.compliance` to know if the contract is respected
+- `req.body` to access the object return by validator
+- `req._originalBody` to access original object return by validator
+- `req.violation` for validation error
+
+
+
+Actually, it was test with [Joi](https://github.com/hapijs/joi), and need [body-parser](https://github.com/expressjs/body-parser).
 
 But should work with other validators if the `.validate()` method has the following signature:
 

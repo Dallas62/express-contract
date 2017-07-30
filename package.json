@@ -12,10 +12,12 @@
   },
   "keywords": [
     "express",
+    "expressjs",
     "api",
     "rest",
     "contract",
-    "interface"
+    "interface",
+    "joi"
   ],
   "author": "Tacyniak Boris <boris.tacyniak@free.fr> (https://www.tacyniak.fr/)",
   "license": "ISC",
