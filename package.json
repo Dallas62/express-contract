@@ -1,0 +1,35 @@
+{
+  "name": "express-contract",
+  "version": "0.0.0",
+  "description": "A middleware for express that to validate inputs of your REST API with Joi, or any validators.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Dallas62/express-contract.git"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "rest",
+    "contract",
+    "interface"
+  ],
+  "author": "Tacyniak Boris <boris.tacyniak@free.fr> (https://www.tacyniak.fr/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dallas62/express-contract/issues"
+  },
+  "homepage": "https://github.com/Dallas62/express-contract#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "joi": "^10.6.0",
+    "nodeunit": "^0.11.1",
+    "supertest": "^3.0.0"
+  }
+}
