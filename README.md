@@ -4,13 +4,13 @@
 
 ## Installation
 
-```
+```console
 npm install --save express-contract
 ```
 
 ## Usage
 
-```
+```js
 const Joi = require('joi'); // Or any schema validator (must have a .validate() method)
 const contract = require('express-contract').contract;
 
@@ -47,7 +47,7 @@ Actually, it was test with [Joi](https://github.com/hapijs/joi), and need [body-
 
 But should work with other validators if the `.validate()` method has the following signature:
 
-```
+```js
 Validator.validate(value, schema, callback(err, value)); 
 ```
 
