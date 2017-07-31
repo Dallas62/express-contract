@@ -59,5 +59,29 @@ module.exports = testCase({
                 test.equal(response.body.test, 'KO');
                 test.done();
             });
+    },
+    'ContractValidator - Test contract Empty': function (test) {
+
+        request(app)
+            .post('/test')
+            .send()
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .then(response => {
+                test.equal(response.body.test, 'KO');
+                test.done();
+            });
+    },
+    'ContractValidator - Test contract missing property': function (test) {
+
+        request(app)
+            .post('/test')
+            .send({ username: 'toto' })
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .then(response => {
+                test.equal(response.body.test, 'KO');
+                test.done();
+            });
     }
 });
