@@ -27,7 +27,7 @@ const schema = Joi.object().keys({
 
 const contract = new ContractValidator(Joi, schema);
 
-app.post('/test', contract.middleware, function (req, res) {
+app.all('/test', contract.middleware, function (req, res) {
     if(!req.compliance) {
         res.status(400).json({test: 'KO'});
     } else {
@@ -36,11 +36,22 @@ app.post('/test', contract.middleware, function (req, res) {
 });
 
 module.exports = testCase({
-    'ContractValidator - Test contract OK': function (test) {
+    'ContractValidator - Test contract POST OK': function (test) {
 
         request(app)
             .post('/test')
             .send({ username: 'toto', birth_year: 1994 })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then(response => {
+                test.equal(response.body.test, 'OK');
+                test.done();
+            });
+    },
+    'ContractValidator - Test contract GET OK': function (test) {
+
+        request(app)
+            .get('/test?username=toto&birth_year=1994')
             .expect('Content-Type', /json/)
             .expect(200)
             .then(response => {

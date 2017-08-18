@@ -1,6 +1,6 @@
 {
   "name": "express-contract",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A middleware for express that to validate inputs of your REST API with Joi, or any validators.",
   "main": "index.js",
   "scripts": {
