@@ -1,6 +1,6 @@
 {
   "name": "express-contract",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A middleware for express that to validate inputs of your REST API with Joi, or any validators.",
   "main": "index.js",
   "scripts": {
@@ -26,12 +26,13 @@
   },
   "homepage": "https://github.com/Dallas62/express-contract#readme",
   "devDependencies": {
+    "@hapi/joi": "^17.1.1",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "joi": "^13.0.1",
-    "nodeunit": "^0.11.2",
-    "supertest": "^3.0.0"
-  }
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodeunit": "^0.11.3",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {}
 }

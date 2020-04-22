@@ -4,17 +4,12 @@ function capitalize(str) {
 
 class ContractValidator {
 
-    constructor(validator, schema, property) {
-        if (!validator || 'function' !== typeof validator.validate) {
-            throw new Error('The validator must have a .validate(value, schema, callback) method.');
-        }
-
-        if ('undefined' === typeof schema) {
-            throw new Error('No schema provided.');
+    constructor(schema, property) {
+        if (!schema || 'function' !== typeof schema.validate) {
+            throw new Error('The schema must have a .validate(value, schema, callback) method.');
         }
 
         this._schema = schema;
-        this._validator = validator;
         this._property = property;
     }
 
@@ -35,16 +30,16 @@ class ContractValidator {
             req.compliance = true;
             req['original' + capitalize(property)] = req[property];
 
-            this._validator.validate(req[property], this._schema, (err, value) => {
-                if (err) {
-                    req.compliance = false;
-                    req.violation = err;
-                }
+            const { error, value } = this._schema.validate(req[property]);
 
-                req[property] = value;
+            if (error) {
+                req.compliance = false;
+                req.violation = error;
+            }
 
-                next();
-            });
+            req[property] = value;
+
+            next();
         };
     }
 }

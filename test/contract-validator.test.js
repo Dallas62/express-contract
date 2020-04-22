@@ -4,7 +4,7 @@ const testCase = require('nodeunit').testCase;
 
 const ContractValidator = require('../src/contract-validator');
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('supertest');
@@ -19,13 +19,13 @@ app.use(bodyParser.json({
 
 const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(30).required(),
-    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    password: Joi.string().pattern(/^[a-zA-Z0-9]{3,30}$/),
     access_token: [Joi.string(), Joi.number()],
     birth_year: Joi.number().integer().min(1900).max(2013),
     email: Joi.string().email()
 }).with('username', 'birth_year').without('password', 'access_token');
 
-const contract = new ContractValidator(Joi, schema);
+const contract = new ContractValidator(schema);
 
 app.all('/test', contract.middleware, function (req, res) {
     if(!req.compliance) {
