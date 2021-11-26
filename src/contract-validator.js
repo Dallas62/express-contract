@@ -1,47 +1,48 @@
 function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 class ContractValidator {
-
-    constructor(schema, property) {
-        if (!schema || 'function' !== typeof schema.validate) {
-            throw new Error('The schema must have a .validate(value, schema, callback) method.');
-        }
-
-        this._schema = schema;
-        this._property = property;
+  constructor(schema, property) {
+    if (!schema || "function" !== typeof schema.validate) {
+      throw new Error(
+        "The schema must have a .validate(value, schema, callback) method."
+      );
     }
 
-    get middleware() {
-        return (req, res, next) => {
-            if (false === req.compliance) {
-                return next();
-            }
+    this._schema = schema;
+    this._property = property;
+  }
 
-            let property = 'body';
+  get middleware() {
+    return (req, res, next) => {
+      if (false === req.compliance) {
+        return next();
+      }
 
-            if ('string' === typeof this._property) {
-                property = this._property;
-            } else if ('GET' === req.method) {
-                property = 'query';
-            }
+      let property = "body";
 
-            req.compliance = true;
-            req['original' + capitalize(property)] = req[property];
+      if ("string" === typeof this._property) {
+        property = this._property;
+      } else if ("GET" === req.method) {
+        property = "query";
+      }
 
-            const { error, value } = this._schema.validate(req[property]);
+      req.compliance = true;
+      req["original" + capitalize(property)] = req[property];
 
-            if (error) {
-                req.compliance = false;
-                req.violation = error;
-            }
+      const { error, value } = this._schema.validate(req[property]);
 
-            req[property] = value;
+      if (error) {
+        req.compliance = false;
+        req.violation = error;
+      }
 
-            next();
-        };
-    }
+      req[property] = value;
+
+      next();
+    };
+  }
 }
 
 module.exports = ContractValidator;
